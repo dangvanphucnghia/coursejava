@@ -1,10 +1,14 @@
 import Image from "next/image";
 import { SocialLinks } from "./SocialLinks";
 import { HiOutlineMail } from "react-icons/hi";
+import { FloatingMascot } from "@/components/FloatingMascot"; 
 
 export function Hero() {
   return (
     <main className="hero-bg">
+      {/* ✅ icon bay theo chuột + xin chào */}
+      <FloatingMascot />
+
       <div className="mx-auto min-h-[100svh] max-w-[1600px] px-4 sm:px-8 lg:px-16">
         {/* ✅ 2 cột NGAY TỪ MOBILE */}
         <div className="grid min-h-[100svh] grid-cols-[1.15fr_0.85fr] items-start gap-4 py-10 sm:gap-6 md:grid-cols-[1fr_1fr] md:items-center md:py-0 lg:grid-cols-[1fr_1.15fr]">

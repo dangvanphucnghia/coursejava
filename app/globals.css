@@ -26,3 +26,71 @@
 .text-soft-shadow {
   text-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
 }
+.floating-mascot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 50;
+  will-change: transform;
+  user-select: none;
+  pointer-events: auto;
+}
+
+.mascot-bubble {
+  position: absolute;
+  left: 50%;
+  top: -14px;
+  transform: translate(-50%, -100%);
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(8px);
+
+  opacity: 0;
+  scale: 0.98;
+  transition: opacity 200ms ease, scale 200ms ease;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.mascot-bubble.show {
+  opacity: 1;
+  scale: 1;
+}
+
+.mascot-hand {
+  position: absolute;
+  right: 10px;
+  bottom: 14px;
+  font-size: 22px;
+  transform-origin: 20% 80%;
+  opacity: 0;
+  transition: opacity 150ms ease;
+  pointer-events: none;
+}
+
+.mascot-hand.wave {
+  opacity: 1;
+  animation: waveHand 650ms ease-in-out 1;
+}
+
+@keyframes waveHand {
+  0% { transform: rotate(0deg) translateY(0); }
+  20% { transform: rotate(18deg) translateY(-1px); }
+  40% { transform: rotate(-18deg) translateY(-1px); }
+  60% { transform: rotate(16deg) translateY(-1px); }
+  80% { transform: rotate(-12deg) translateY(0); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mascot-hand.wave {
+    animation: none;
+  }
+}
