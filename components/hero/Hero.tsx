@@ -5,99 +5,122 @@ import { FloatingMascot } from "@/components/FloatingMascot";
 
 export function Hero() {
   return (
-    <main className="hero-bg">
-      {/* ✅ icon bay theo chuột + xin chào */}
+    <main className="relative overflow-hidden bg-[#0b0c10]">
+      {/* Mascot */}
       <FloatingMascot />
 
+      {/* Background: gradient + blur blobs */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-24 left-[-120px] h-[420px] w-[420px] rounded-full bg-white/10 blur-3xl" />
+        <div className="absolute -bottom-32 right-[-140px] h-[520px] w-[520px] rounded-full bg-white/10 blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_20%_20%,rgba(255,255,255,0.10),transparent_60%),radial-gradient(900px_500px_at_80%_30%,rgba(255,255,255,0.06),transparent_60%)]" />
+      </div>
+
       <div className="mx-auto min-h-[100svh] max-w-[1600px] px-4 sm:px-8 lg:px-16">
-        {/* ✅ 2 cột NGAY TỪ MOBILE */}
-        <div className="grid min-h-[100svh] grid-cols-[1.15fr_0.85fr] items-start gap-4 py-10 sm:gap-6 md:grid-cols-[1fr_1fr] md:items-center md:py-0 lg:grid-cols-[1fr_1.15fr]">
+        <div className="grid min-h-[100svh] grid-cols-1 items-center gap-10 py-10 md:grid-cols-[1.05fr_0.95fr] md:py-0">
           {/* LEFT */}
-          <section className="pt-4 md:py-10">
-            <div className="text-soft-shadow text-white">
-              <h1 className="text-[clamp(2.0rem,6.2vw,5.6rem)] font-extrabold leading-[0.95]">
+          <section className="relative z-10">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] tracking-[0.22em] text-white/75 backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-white/70" />
+              AVAILABLE FOR WORK
+            </div>
+
+            <h1 className="mt-5 text-white">
+              <span className="block text-[clamp(2.2rem,6vw,5.4rem)] font-extrabold leading-[0.96] tracking-[-0.02em]">
                 Portfolio
-              </h1>
-
-              <p className="mt-2 text-[clamp(0.7rem,2.1vw,1.25rem)] font-semibold tracking-[0.28em] text-white/80">
+              </span>
+              <span className="mt-3 block text-[clamp(0.8rem,2vw,1.2rem)] font-semibold tracking-[0.32em] text-white/70">
                 ĐẶNG VĂN PHÚC NGHĨA
-              </p>
+              </span>
+            </h1>
 
-              {/* ✅ Mobile: tách JAVA / DEVELOPER xuống dòng cho vừa cột trái */}
-              <div className="mt-5 font-extrabold leading-[0.92]">
-                <span className="block text-[clamp(2.2rem,7.2vw,6.6rem)] text-white">
-                  JAVA
-                </span>
-                <span className="block text-[clamp(2.0rem,6.6vw,6.6rem)] text-white/45">
-                  DEVELOPER
-                </span>
+            <div className="mt-6">
+              <div className="text-[clamp(2.6rem,7vw,6.6rem)] font-extrabold leading-[0.9] tracking-[-0.03em]">
+                <span className="block text-white">JAVA</span>
+                <span className="block text-white/35">DEVELOPER</span>
               </div>
 
-              <p className="mt-3 text-[clamp(0.75rem,2.2vw,1.4rem)] font-semibold tracking-[0.22em] text-white/80">
+              <p className="mt-4 max-w-[44ch] text-[clamp(0.9rem,2.2vw,1.15rem)] font-medium leading-[1.65] text-white/70">
+                Xây dựng backend sạch, tối ưu hiệu năng, và thiết kế hệ thống dễ mở rộng.
+                Tập trung vào trải nghiệm người dùng và chất lượng sản phẩm.
+              </p>
+
+              <p className="mt-4 text-[12px] font-semibold tracking-[0.28em] text-white/60">
                 +1 NĂM KINH NGHIỆM
               </p>
 
               {/* Email */}
               <a
                 href="mailto:nghia812014@gmail.com"
-                className="mt-3 inline-flex items-center gap-2 text-[clamp(0.72rem,2.2vw,1.15rem)] font-semibold tracking-[0.06em] text-white/75 transition hover:text-white"
+                className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[13px] font-semibold text-white/75 backdrop-blur transition hover:border-white/30 hover:text-white"
                 aria-label="Email nghia812014@gmail.com"
               >
-                <span className="grid h-7 w-7 place-items-center rounded-full border border-white/20 bg-black/10 backdrop-blur-sm sm:h-8 sm:w-8">
-                  <HiOutlineMail className="h-4 w-4 text-white/85 sm:h-5 sm:w-5" />
+                <span className="grid h-8 w-8 place-items-center rounded-full border border-white/15 bg-black/20">
+                  <HiOutlineMail className="h-5 w-5" />
                 </span>
-                <span className="truncate max-w-[10.5rem] sm:max-w-none">
+                <span className="truncate max-w-[15rem] sm:max-w-none">
                   nghia812014@gmail.com
                 </span>
               </a>
-            </div>
 
-            {/* Icons */}
-            <div className="mt-5">
-              <SocialLinks />
-            </div>
+              {/* Social */}
+              <div className="mt-6">
+                <SocialLinks />
+              </div>
 
-            {/* Button */}
-            <div className="mt-6">
-              <a
-                href="#start"
-                className="inline-flex w-full max-w-[220px] items-center justify-center rounded-full border border-white/20 bg-black/10 px-6 py-3 text-[0.62rem] font-semibold tracking-[0.32em] text-white/70 backdrop-blur-sm transition hover:border-white/35 hover:text-white sm:max-w-[260px] sm:px-8 sm:text-[0.68rem]"
-              >
-                START PORTFOLIO
-              </a>
+              {/* CTA */}
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap">
+                <a
+                  href="#start"
+                  className="inline-flex w-full justify-center rounded-full bg-white px-6 py-3 text-[12px] font-bold tracking-[0.22em] text-black transition hover:opacity-90 sm:w-auto"
+                >
+                  START PORTFOLIO
+                </a>
+
+                <a
+                  href="#projects"
+                  className="inline-flex w-full justify-center rounded-full border border-white/18 bg-white/5 px-6 py-3 text-[12px] font-bold tracking-[0.22em] text-white/80 backdrop-blur transition hover:border-white/30 hover:text-white sm:w-auto"
+                >
+                  VIEW PROJECTS
+                </a>
+
+                <a
+                  href="#courses"
+                  className="inline-flex w-full justify-center rounded-full border border-white/18 bg-white/5 px-6 py-3 text-[12px] font-bold tracking-[0.22em] text-white/80 backdrop-blur transition hover:border-white/30 hover:text-white sm:w-auto"
+                >
+                  COURSES
+                </a>
+              </div>
+
             </div>
           </section>
 
           {/* RIGHT */}
-          <section className="flex justify-end pt-4 md:py-10">
-            {/* ✅ Mobile 2 cột: ảnh phải nhỏ, cao vừa màn hình */}
-            <div
-              className="
-    relative overflow-hidden rounded-[18px] border border-white/10
-    bg-black/10 backdrop-blur-sm
-    shadow-[0_18px_60px_rgba(0,0,0,0.30)]
-    aspect-[3/4] w-full
-    sm:rounded-[22px] md:aspect-[932/1049] md:rounded-[26px]
-    lg:h-[calc(100vh-7.5rem)] lg:w-auto lg:rounded-[28px]
-  "
-            >
-              {/* glow sau lưng */}
-              <div className="pointer-events-none absolute -right-10 top-10 h-[320px] w-[320px] rounded-full bg-white/10 blur-3xl" />
-              <div className="pointer-events-none absolute left-10 bottom-10 h-[260px] w-[260px] rounded-full bg-white/5 blur-3xl" />
+          <section className="relative z-10 flex justify-center md:justify-end">
+            <div className="relative w-full max-w-[520px]">
+              {/* Accent ring behind card */}
+              <div className="pointer-events-none absolute -inset-6 rounded-[34px] bg-[radial-gradient(closest-side,rgba(255,255,255,0.20),transparent_70%)] blur-2xl" />
 
-              {/* overlay tối nhẹ cho khung “ăn” với nền */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+              {/* Image card */}
+              <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border border-white/15 bg-white/5 shadow-[0_24px_80px_rgba(0,0,0,0.55)] backdrop-blur">
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
 
-              <Image
-                src="/images/hero 1.png"
-                alt="Hero"
-                fill
-                priority
-                className="object-contain p-6 md:p-10"
-                sizes="(min-width: 1024px) 58vw, (min-width: 768px) 48vw, 44vw"
-              />
+                <Image
+                  src="/images/hero 1.png"
+                  alt="Hero"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 42vw, (min-width: 768px) 46vw, 92vw"
+                  className="object-cover"
+                />
+              </div>
+
+              {/* Tiny caption */}
+              <div className="mt-4 flex items-center justify-between text-[11px] tracking-[0.22em] text-white/55">
+                <span>BACKEND • JAVA • API</span>
+                <span>2026</span>
+              </div>
             </div>
-
           </section>
         </div>
       </div>
