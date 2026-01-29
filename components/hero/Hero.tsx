@@ -1,9 +1,44 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { SocialLinks } from "./SocialLinks";
 import { HiOutlineMail } from "react-icons/hi";
 import { FloatingMascot } from "@/components/FloatingMascot";
 
+type Lang = "vi" | "en";
+
+const TEXT: Record<Lang, any> = {
+  vi: {
+    name: "ĐẶNG VĂN PHÚC NGHĨA",
+    roleTop: "JAVA",
+    roleBottom: "DEVELOPER",
+    exp: "+1 NĂM KINH NGHIỆM",
+    desc:
+      "Xây dựng backend sạch, tối ưu hiệu năng, và thiết kế hệ thống dễ mở rộng. Tập trung vào trải nghiệm người dùng và chất lượng sản phẩm.",
+    ctaStart: "BẮT ĐẦU",
+    ctaProjects: "DỰ ÁN",
+    ctaCourses: "KHOÁ HỌC",
+    captionLeft: "BACKEND • JAVA • API",
+  },
+  en: {
+    name: "DANG VAN PHUC NGHIA",
+    roleTop: "JAVA",
+    roleBottom: "DEVELOPER",
+    exp: "1+ YEAR EXPERIENCE",
+    desc:
+      "Build clean backends, optimize performance, and design scalable systems. Focused on user experience and product quality.",
+    ctaStart: "START PORTFOLIO",
+    ctaProjects: "VIEW PROJECTS",
+    ctaCourses: "COURSES",
+    captionLeft: "BACKEND • JAVA • API",
+  },
+};
+
 export function Hero() {
+  const [lang, setLang] = useState<Lang>("vi");
+  const t = TEXT[lang];
+
   return (
     <main className="relative overflow-hidden bg-[#0b0c10]">
       {/* Mascot */}
@@ -20,9 +55,35 @@ export function Hero() {
         <div className="grid min-h-[100svh] grid-cols-1 items-center gap-10 py-10 md:grid-cols-[1.05fr_0.95fr] md:py-0">
           {/* LEFT */}
           <section className="relative z-10">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] tracking-[0.22em] text-white/75 backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-white/70" />
-              AVAILABLE FOR WORK
+            {/* Language Switch */}
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setLang("vi")}
+                className={[
+                  "rounded-full px-3 py-1 text-[11px] font-bold tracking-[0.22em] transition",
+                  lang === "vi"
+                    ? "bg-white text-black"
+                    : "border border-white/20 bg-white/5 text-white/70 hover:border-white/35 hover:text-white",
+                ].join(" ")}
+                aria-pressed={lang === "vi"}
+              >
+                VI
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setLang("en")}
+                className={[
+                  "rounded-full px-3 py-1 text-[11px] font-bold tracking-[0.22em] transition",
+                  lang === "en"
+                    ? "bg-white text-black"
+                    : "border border-white/20 bg-white/5 text-white/70 hover:border-white/35 hover:text-white",
+                ].join(" ")}
+                aria-pressed={lang === "en"}
+              >
+                EN
+              </button>
             </div>
 
             <h1 className="mt-5 text-white">
@@ -30,23 +91,22 @@ export function Hero() {
                 Portfolio
               </span>
               <span className="mt-3 block text-[clamp(0.8rem,2vw,1.2rem)] font-semibold tracking-[0.32em] text-white/70">
-                ĐẶNG VĂN PHÚC NGHĨA
+                {t.name}
               </span>
             </h1>
 
             <div className="mt-6">
               <div className="text-[clamp(2.6rem,7vw,6.6rem)] font-extrabold leading-[0.9] tracking-[-0.03em]">
-                <span className="block text-white">JAVA</span>
-                <span className="block text-white/35">DEVELOPER</span>
+                <span className="block text-white">{t.roleTop}</span>
+                <span className="block text-white/35">{t.roleBottom}</span>
               </div>
 
               <p className="mt-4 max-w-[44ch] text-[clamp(0.9rem,2.2vw,1.15rem)] font-medium leading-[1.65] text-white/70">
-                Xây dựng backend sạch, tối ưu hiệu năng, và thiết kế hệ thống dễ mở rộng.
-                Tập trung vào trải nghiệm người dùng và chất lượng sản phẩm.
+                {t.desc}
               </p>
 
               <p className="mt-4 text-[12px] font-semibold tracking-[0.28em] text-white/60">
-                +1 NĂM KINH NGHIỆM
+                {t.exp}
               </p>
 
               {/* Email */}
@@ -74,24 +134,23 @@ export function Hero() {
                   href="#start"
                   className="inline-flex w-full justify-center rounded-full bg-white px-6 py-3 text-[12px] font-bold tracking-[0.22em] text-black transition hover:opacity-90 sm:w-auto"
                 >
-                  START PORTFOLIO
+                  {t.ctaStart}
                 </a>
 
                 <a
                   href="#projects"
                   className="inline-flex w-full justify-center rounded-full border border-white/18 bg-white/5 px-6 py-3 text-[12px] font-bold tracking-[0.22em] text-white/80 backdrop-blur transition hover:border-white/30 hover:text-white sm:w-auto"
                 >
-                  VIEW PROJECTS
+                  {t.ctaProjects}
                 </a>
 
                 <a
                   href="#courses"
                   className="inline-flex w-full justify-center rounded-full border border-white/18 bg-white/5 px-6 py-3 text-[12px] font-bold tracking-[0.22em] text-white/80 backdrop-blur transition hover:border-white/30 hover:text-white sm:w-auto"
                 >
-                  COURSES
+                  {t.ctaCourses}
                 </a>
               </div>
-
             </div>
           </section>
 
@@ -117,7 +176,7 @@ export function Hero() {
 
               {/* Tiny caption */}
               <div className="mt-4 flex items-center justify-between text-[11px] tracking-[0.22em] text-white/55">
-                <span>BACKEND • JAVA • API</span>
+                <span>{t.captionLeft}</span>
                 <span>2026</span>
               </div>
             </div>
