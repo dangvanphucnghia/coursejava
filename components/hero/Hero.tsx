@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { SocialLinks } from "./SocialLinks";
 import { HiOutlineMail } from "react-icons/hi";
-import { FloatingMascot } from "@/components/FloatingMascot"; 
+import { FloatingMascot } from "@/components/FloatingMascot";
 
 export function Hero() {
   return (
@@ -71,26 +71,33 @@ export function Hero() {
           {/* RIGHT */}
           <section className="flex justify-end pt-4 md:py-10">
             {/* ✅ Mobile 2 cột: ảnh phải nhỏ, cao vừa màn hình */}
-            <div className="w-full max-w-[360px] md:max-w-[560px] lg:max-w-[980px]">
-              <div
-                className="
-                  relative overflow-hidden rounded-[18px] border border-black/45 bg-neutral-200
-                  shadow-[0_18px_60px_rgba(0,0,0,0.22)]
-                  aspect-[3/4] w-full
-                  sm:rounded-[22px] md:aspect-[932/1049] md:rounded-[26px]
-                  lg:h-[calc(100vh-7.5rem)] lg:w-auto lg:rounded-[28px]
-                "
-              >
-                <Image
-                  src="/images/hero.png"
-                  alt="Hero"
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 58vw, (min-width: 768px) 48vw, 44vw"
-                />
-              </div>
+            <div
+              className="
+    relative overflow-hidden rounded-[18px] border border-white/10
+    bg-black/10 backdrop-blur-sm
+    shadow-[0_18px_60px_rgba(0,0,0,0.30)]
+    aspect-[3/4] w-full
+    sm:rounded-[22px] md:aspect-[932/1049] md:rounded-[26px]
+    lg:h-[calc(100vh-7.5rem)] lg:w-auto lg:rounded-[28px]
+  "
+            >
+              {/* glow sau lưng */}
+              <div className="pointer-events-none absolute -right-10 top-10 h-[320px] w-[320px] rounded-full bg-white/10 blur-3xl" />
+              <div className="pointer-events-none absolute left-10 bottom-10 h-[260px] w-[260px] rounded-full bg-white/5 blur-3xl" />
+
+              {/* overlay tối nhẹ cho khung “ăn” với nền */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+
+              <Image
+                src="/images/hero 1.png"
+                alt="Hero"
+                fill
+                priority
+                className="object-contain p-6 md:p-10"
+                sizes="(min-width: 1024px) 58vw, (min-width: 768px) 48vw, 44vw"
+              />
             </div>
+
           </section>
         </div>
       </div>
