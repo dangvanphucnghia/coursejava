@@ -35,6 +35,11 @@ const TEXT: Record<Lang, any> = {
   },
 };
 
+const MASCOT_BUBBLE: Record<Lang, string> = {
+  vi: "Website đang được hoàn thiện. Vui lòng liên hệ để trao đổi thêm.",
+  en: "This website is under development. Please contact me for further discussion.",
+};
+
 export function Hero() {
   const [lang, setLang] = useState<Lang>("vi");
   const t = TEXT[lang];
@@ -42,7 +47,7 @@ export function Hero() {
   return (
     <main className="relative overflow-hidden bg-[#0b0c10]">
       {/* Mascot */}
-      <FloatingMascot />
+      <FloatingMascot text={MASCOT_BUBBLE[lang]} />
 
       {/* Background: gradient + blur blobs */}
       <div className="pointer-events-none absolute inset-0">
