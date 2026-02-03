@@ -5,6 +5,7 @@ import { useState } from "react";
 import { SocialLinks } from "./SocialLinks";
 import { HiOutlineMail } from "react-icons/hi";
 import { FloatingMascot } from "@/components/FloatingMascot";
+import Link from "next/link";
 
 type Lang = "vi" | "en";
 
@@ -149,12 +150,13 @@ export function Hero() {
                   {t.ctaProjects}
                 </a>
 
-                <a
-                  href="#courses"
-                  className="inline-flex w-full justify-center rounded-full border border-white/18 bg-white/5 px-6 py-3 text-[12px] font-bold tracking-[0.22em] text-white/80 backdrop-blur transition hover:border-white/30 hover:text-white sm:w-auto"
-                >
-                  {t.ctaCourses}
-                </a>
+                <Link
+  href="/courses"
+  className="inline-flex w-full justify-center rounded-full border border-white/18 bg-white/5 px-6 py-3 text-[12px] font-bold tracking-[0.22em] text-white/80 backdrop-blur transition hover:border-white/30 hover:text-white sm:w-auto"
+>
+  {t.ctaCourses}
+</Link>
+
               </div>
             </div>
           </section>

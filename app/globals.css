@@ -94,3 +94,11 @@
     animation: none;
   }
 }
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.font-script {
+  font-family: "Pacifico", cursive;
+}
