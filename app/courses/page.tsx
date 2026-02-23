@@ -28,7 +28,7 @@ export default function CoursesPage() {
 
             <div className="mt-3 relative z-10">
               <div className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700">
-                Giá: 50.000đ
+                Giá: FREE
               </div>
             </div>
 
@@ -42,14 +42,13 @@ export default function CoursesPage() {
                 MUA KHOÁ HỌC
               </a>
 
-              <a
-                href={TRIAL_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
+              {/* CHỈ SỬA CHỖ NÀY: HỌC THỬ -> dẫn tới trang Java Core */}
+              <Link
+                href="/courses/java-core"
                 className="inline-flex rounded-full border border-[#184b55] bg-white px-4 py-2 text-xs font-bold tracking-widest text-[#184b55] transition hover:bg-[#184b55] hover:text-white"
               >
                 HỌC THỬ
-              </a>
+              </Link>
             </div>
           </div>
 
