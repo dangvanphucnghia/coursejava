@@ -33,21 +33,11 @@ export default function CoursesPage() {
             </div>
 
             <div className="mt-4 flex flex-wrap items-center gap-3 relative z-10">
-              <a
-                href={ZALO_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex rounded-full bg-[#184b55] px-4 py-2 text-xs font-bold tracking-widest text-white"
-              >
-                MUA KHOÁ HỌC
-              </a>
-
-              {/* CHỈ SỬA CHỖ NÀY: HỌC THỬ -> dẫn tới trang Java Core */}
               <Link
                 href="/courses/java-core"
-                className="inline-flex rounded-full border border-[#184b55] bg-white px-4 py-2 text-xs font-bold tracking-widest text-[#184b55] transition hover:bg-[#184b55] hover:text-white"
+                className="inline-flex rounded-full bg-[#184b55] px-4 py-2 text-xs font-bold tracking-widest text-white transition hover:opacity-90"
               >
-                HỌC THỬ
+                HỌC NGAY
               </Link>
             </div>
           </div>
