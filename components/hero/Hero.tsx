@@ -9,7 +9,19 @@ import Link from "next/link";
 
 type Lang = "vi" | "en";
 
-const TEXT: Record<Lang, any> = {
+type HeroText = {
+  name: string;
+  roleTop: string;
+  roleBottom: string;
+  exp: string;
+  desc: string;
+  ctaStart: string;
+  ctaProjects: string;
+  ctaCourses: string;
+  captionLeft: string;
+};
+
+const TEXT: Record<Lang, HeroText> = {
   vi: {
     name: "ĐẶNG VĂN PHÚC NGHĨA",
     roleTop: "JAVA",

@@ -27,6 +27,12 @@ export function FloatingMascot({ text }: { text: string }) {
     const OFFSET = { x: 28, y: 28 }; // icon chỉ bay "gần" chuột, không dính sát
     const EASE = reduceMotion ? 1 : 0.10; // càng nhỏ càng mượt
 
+    const triggerWave = () => {
+      setWaving(true);
+      if (waveTimer.current) window.clearTimeout(waveTimer.current);
+      waveTimer.current = window.setTimeout(() => setWaving(false), 1200);
+    };
+
     const onMove = (e: PointerEvent) => {
       const vw = window.innerWidth;
       const vh = window.innerHeight;
@@ -67,15 +73,6 @@ export function FloatingMascot({ text }: { text: string }) {
       raf.current = window.requestAnimationFrame(tick);
     };
 
-    const triggerWave = () => {
-      setWaving(true);
-      if (waveTimer.current) window.clearTimeout(waveTimer.current);
-      waveTimer.current = window.setTimeout(() => setWaving(false), 1200);
-    };
-
-    // expose triggerWave to closure
-    (window as any).__triggerWave = triggerWave;
-
     window.addEventListener("pointermove", onMove, { passive: true });
     raf.current = window.requestAnimationFrame(tick);
 
@@ -83,7 +80,6 @@ export function FloatingMascot({ text }: { text: string }) {
       window.removeEventListener("pointermove", onMove);
       if (raf.current) window.cancelAnimationFrame(raf.current);
       if (waveTimer.current) window.clearTimeout(waveTimer.current);
-      delete (window as any).__triggerWave;
     };
   }, []);
 

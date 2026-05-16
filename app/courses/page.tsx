@@ -1,103 +1,136 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { FiArrowRight, FiFilter } from "react-icons/fi";
+import {
+  courseCategoryOptions,
+  courses,
+  type CourseCategory,
+} from "@/data/courses";
+import { CourseCard } from "@/components/ui/CourseCard";
 
-const TRIAL_LINK =
-  "https://drive.google.com/drive/folders/1NTSIdfA1-gPouEitkfUVNbbS91P7u_8z?hl=vi";
+export const metadata: Metadata = {
+  title: "Khóa học miễn phí - CourseJava",
+  description:
+    "Danh sách khóa học Java, Frontend, Full-stack và English for Developers miễn phí cho người mới bắt đầu.",
+};
 
-const ZALO_LINK = "https://zalo.me/0368285760";
+type CoursesPageProps = {
+  searchParams?: Promise<{
+    category?: string;
+  }>;
+};
 
-export default function CoursesPage() {
+const validCategories: CourseCategory[] = ["java", "frontend", "backend", "english", "project"];
+
+function isCourseCategory(value: string | undefined): value is CourseCategory {
+  return Boolean(value && validCategories.includes(value as CourseCategory));
+}
+
+export default async function CoursesPage({ searchParams }: CoursesPageProps) {
+  const params = await searchParams;
+  const selectedCategory = isCourseCategory(params?.category) ? params.category : "all";
+  const visibleCourses =
+    selectedCategory === "all"
+      ? courses
+      : courses.filter((course) => course.category === selectedCategory);
+
   return (
-    <main className="min-h-screen bg-[#f6f9fc]">
-      <section className="mx-auto max-w-6xl px-4 py-16">
-        <h1 className="text-4xl font-extrabold text-slate-900">Khoá học</h1>
-        <p className="mt-3 text-slate-600">Chọn khóa học bạn muốn học.</p>
+    <main className="bg-slate-50">
+      <section className="border-b border-slate-200 bg-white py-14 sm:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-wide text-cyan-700">
+              CourseJava Courses
+            </p>
+            <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl">
+              Khóa học miễn phí cho người mới học lập trình.
+            </h1>
+            <p className="mt-5 text-base leading-8 text-slate-600 sm:text-lg">
+              Chọn khóa học theo lộ trình: frontend căn bản, Java Core, English Free,
+              backend Spring Boot và project thực chiến.
+            </p>
+          </div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {/* Java Core card */}
-          <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/courses/java-core"
-              className="absolute inset-0 rounded-2xl"
-              aria-label="Xem chi tiết khoá Java Core"
-            />
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan-600 px-6 py-3 text-sm font-extrabold text-white shadow-sm shadow-cyan-600/20 transition hover:bg-cyan-700"
+            >
+              Vào Java Core
+              <FiArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <Link
+              href="/#roadmap"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-900 transition hover:border-cyan-300 hover:text-cyan-700"
+            >
+              Xem roadmap full-stack
+            </Link>
+          </div>
+        </div>
+      </section>
 
-            <h2 className="text-xl font-bold text-slate-900">Java Core</h2>
-            <p className="mt-2 text-slate-600">
-              Nền tảng Java, OOP, Collections, Exception, I/O, JVM.
-            </p>
-
-            <div className="mt-3 relative z-10">
-              <div className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700">
-                Giá: FREE
+      <section className="py-12 sm:py-14" aria-labelledby="course-list-title">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+            <div>
+              <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-slate-500">
+                <FiFilter className="h-4 w-4" aria-hidden="true" />
+                Bộ lọc
               </div>
+              <h2 id="course-list-title" className="mt-2 text-2xl font-extrabold text-slate-950">
+                Danh sách khóa học
+              </h2>
             </div>
 
-            <div className="mt-4 flex flex-wrap items-center gap-3 relative z-10">
+            <div className="flex gap-2 overflow-x-auto pb-1">
+              {courseCategoryOptions.map((option) => {
+                const isActive = selectedCategory === option.value;
+                const href = option.value === "all" ? "/courses" : `/courses?category=${option.value}`;
+
+                return (
+                  <Link
+                    key={option.value}
+                    href={href}
+                    className={[
+                      "shrink-0 rounded-full px-4 py-2 text-sm font-bold transition",
+                      isActive
+                        ? "bg-slate-950 text-white"
+                        : "bg-white text-slate-600 ring-1 ring-slate-200 hover:text-cyan-700",
+                    ].join(" ")}
+                  >
+                    {option.label}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {visibleCourses.map((course) => (
+              <CourseCard key={course.slug} course={course} showOutcomes />
+            ))}
+          </div>
+
+          <div className="mt-10 rounded-lg border border-cyan-200 bg-cyan-50 p-6">
+            <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+              <div>
+                <h2 className="text-xl font-extrabold text-slate-950">
+                  Nên học theo thứ tự nào?
+                </h2>
+                <p className="mt-2 text-sm leading-6 text-slate-700">
+                  Nếu bạn bắt đầu từ số 0, hãy đi theo roadmap: HTML/CSS → JavaScript →
+                  React/Next.js → Java Core → Spring Boot → Database → Project.
+                </p>
+              </div>
               <Link
-                href="/courses/java-core"
-                className="inline-flex rounded-full bg-[#184b55] px-4 py-2 text-xs font-bold tracking-widest text-white transition hover:opacity-90"
+                href="/#roadmap"
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-800"
               >
-                HỌC NGAY
+                Xem lộ trình
+                <FiArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
           </div>
-
-          {/* TOEIC MS Thắm card */}
-          <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-            <Link
-              href="/courses/toeic-ms-tham"
-              className="absolute inset-0 rounded-2xl"
-              aria-label="Xem chi tiết khoá TOEIC MS Thắm"
-            />
-
-            <h2 className="text-xl font-bold text-slate-900">TOEIC MS Thắm</h2>
-            <p className="mt-2 text-slate-600">
-              Luyện TOEIC từ cơ bản đến nâng cao: Listening, Reading, mẹo làm bài.
-            </p>
-
-            <div className="mt-3 relative z-10">
-              <div className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700">
-                Giá: 50.000đ
-              </div>
-            </div>
-
-            <div className="mt-4 flex flex-wrap items-center gap-3 relative z-10">
-              <a
-                href={ZALO_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex rounded-full bg-[#184b55] px-4 py-2 text-xs font-bold tracking-widest text-white"
-              >
-                MUA KHOÁ HỌC
-              </a>
-
-              <a
-                href={TRIAL_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex rounded-full border border-[#184b55] bg-white px-4 py-2 text-xs font-bold tracking-widest text-[#184b55] transition hover:bg-[#184b55] hover:text-white"
-              >
-                HỌC THỬ
-              </a>
-            </div>
-          </div>
-
-          {/* Placeholder khoá khác */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 opacity-60">
-            <h2 className="text-xl font-bold text-slate-900">Spring Boot</h2>
-            <p className="mt-2 text-slate-600">Sắp ra mắt</p>
-          </div>
-
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 opacity-60">
-            <h2 className="text-xl font-bold text-slate-900">SQL</h2>
-            <p className="mt-2 text-slate-600">Sắp ra mắt</p>
-          </div>
-        </div>
-
-        <div className="mt-10">
-          <Link href="/" className="text-sm font-semibold text-[#184b55]">
-            ← Quay về trang chủ
-          </Link>
         </div>
       </section>
     </main>

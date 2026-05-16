@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { Be_Vietnam_Pro } from "next/font/google";
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
+import "./globals.css";
 
 const beVietnam = Be_Vietnam_Pro({
   subsets: ["latin", "vietnamese"],
@@ -8,8 +10,26 @@ const beVietnam = Be_Vietnam_Pro({
 });
 
 export const metadata: Metadata = {
-  title: "Đặng Văn Phúc Nghĩa",
-  description: "Java Developer",
+  title: "CourseJava - Học lập trình Full-stack từ số 0",
+  description:
+    "Nền tảng học Java, Next.js, Full-stack và English for Developers miễn phí cho người mới bắt đầu.",
+  metadataBase: new URL("https://coursejava.com"),
+  keywords: [
+    "CourseJava",
+    "học Java miễn phí",
+    "học lập trình từ số 0",
+    "Full-stack roadmap",
+    "English for Developers",
+  ],
+  openGraph: {
+    title: "CourseJava - Học lập trình Full-stack từ số 0",
+    description:
+      "Nền tảng học Java, Next.js, Full-stack và English for Developers miễn phí cho người mới bắt đầu.",
+    url: "https://coursejava.com",
+    siteName: "CourseJava",
+    locale: "vi_VN",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -19,7 +39,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
-      <body className={`${beVietnam.className} antialiased`}>{children}</body>
+      <body className={`${beVietnam.className} bg-slate-50 text-slate-950 antialiased`}>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
