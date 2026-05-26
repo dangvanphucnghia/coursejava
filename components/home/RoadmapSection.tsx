@@ -55,20 +55,35 @@ export function RoadmapSection() {
   return (
     <section id="roadmap" className="bg-white py-16 sm:py-20" aria-labelledby="roadmap-title">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="text-sm font-bold uppercase tracking-wide text-cyan-700">
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase text-cyan-700">
             Roadmap Full-stack
-          </p>
-          <h2
-            id="roadmap-title"
-            className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl"
-          >
-            Đi từ nền tảng web đến project full-stack hoàn chỉnh.
-          </h2>
-          <p className="mt-4 text-base leading-7 text-slate-600">
-            Lộ trình chia thành từng chặng nhỏ, có kỹ năng cần học và mốc sản phẩm rõ ràng
-            để người mới không bị ngợp.
-          </p>
+            </p>
+            <h2
+              id="roadmap-title"
+              className="mt-3 text-3xl font-extrabold text-slate-950 sm:text-4xl"
+            >
+              Một lộ trình có thứ tự, có mốc sản phẩm sau mỗi chặng.
+            </h2>
+            <p className="mt-4 text-base leading-7 text-slate-600">
+              Mỗi bước chỉ tập trung một nhóm kỹ năng chính, đi kèm milestone để bạn biết
+              mình đang tiến tới sản phẩm nào.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-3 overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
+            {[
+              ["6", "chặng học"],
+              ["4", "project nhỏ"],
+              ["0đ", "chi phí"],
+            ].map(([value, label]) => (
+              <div key={label} className="border-r border-slate-200 p-4 last:border-r-0">
+                <p className="text-2xl font-extrabold text-slate-950">{value}</p>
+                <p className="mt-1 text-xs font-semibold text-slate-500">{label}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -79,7 +94,7 @@ export function RoadmapSection() {
             return (
               <article
                 key={item.step}
-                className={`rounded-lg border bg-white p-5 shadow-sm ${theme.border}`}
+                className={`rounded-lg border bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-200/70 ${theme.border}`}
               >
                 <div className="flex items-start justify-between gap-4">
                   <span
@@ -96,7 +111,7 @@ export function RoadmapSection() {
                 <p className="mt-3 text-sm leading-6 text-slate-600">{item.description}</p>
 
                 <div className="mt-5 rounded-lg bg-slate-50 p-4">
-                  <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
+                  <p className="text-xs font-bold uppercase text-slate-500">
                     Milestone
                   </p>
                   <p className="mt-1 text-sm font-bold text-slate-900">{item.milestone}</p>

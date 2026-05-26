@@ -17,8 +17,8 @@ export default function HomePage() {
   return (
     <main>
       <HeroSection />
-      <RoadmapSection />
       <FeaturedCourses />
+      <RoadmapSection />
       <EnglishSection />
       <ProjectSection />
       <BenefitsSection />

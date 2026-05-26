@@ -23,11 +23,11 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-200 bg-slate-950 text-white">
+    <footer className="border-t border-slate-200 bg-[#0f172a] text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_1fr] lg:px-8">
         <div>
           <Link href="/" className="inline-flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-lg bg-cyan-500 text-slate-950">
+            <span className="grid h-10 w-10 place-items-center rounded-lg bg-cyan-400 text-slate-950">
               CJ
             </span>
             <span>
@@ -46,7 +46,7 @@ export function Footer() {
           <div className="mt-6 flex flex-wrap gap-3 text-sm text-slate-300">
             <a
               href="mailto:nghia812014@gmail.com"
-              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 transition hover:bg-white/15"
+              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 transition hover:bg-cyan-400 hover:text-slate-950"
             >
               <FiMail className="h-4 w-4" aria-hidden="true" />
               nghia812014@gmail.com
@@ -55,7 +55,7 @@ export function Footer() {
               href="https://github.com/dangvanphucnghia"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 transition hover:bg-white/15"
+              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 transition hover:bg-amber-300 hover:text-slate-950"
             >
               <FiGithub className="h-4 w-4" aria-hidden="true" />
               GitHub
@@ -66,7 +66,7 @@ export function Footer() {
         <div className="grid gap-8 sm:grid-cols-2">
           {footerLinks.map((group) => (
             <div key={group.title}>
-              <h2 className="text-sm font-bold uppercase tracking-wider text-cyan-300">
+              <h2 className="text-sm font-bold uppercase text-cyan-300">
                 {group.title}
               </h2>
               <ul className="mt-4 space-y-3">

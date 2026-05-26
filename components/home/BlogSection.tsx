@@ -20,25 +20,25 @@ const resources = [
 
 export function BlogSection() {
   return (
-    <section id="blog" className="bg-slate-50 py-16 sm:py-20" aria-labelledby="blog-title">
+    <section id="blog" className="bg-[#f8fafc] py-16 sm:py-20" aria-labelledby="blog-title">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
-            <p className="text-sm font-bold uppercase tracking-wide text-cyan-700">
+            <p className="text-sm font-bold uppercase text-cyan-700">
               Blog/Tài liệu học tập
             </p>
             <h2
               id="blog-title"
-              className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl"
+              className="mt-3 text-3xl font-extrabold text-slate-950 sm:text-4xl"
             >
-              Tài liệu ngắn, dễ đọc, bám sát lộ trình học.
+              Tài liệu ngắn, dễ tra, bám sát từng bước học.
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-600">
               Khu vực này sẽ mở rộng thành thư viện bài viết, ghi chú và checklist học tập
               khi các khóa học được cập nhật.
             </p>
           </div>
-          <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-slate-600 ring-1 ring-slate-200">
+          <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-slate-600 shadow-sm ring-1 ring-slate-200">
             Đang cập nhật
             <FiArrowRight className="h-4 w-4" aria-hidden="true" />
           </span>
@@ -49,8 +49,11 @@ export function BlogSection() {
             const Icon = resource.icon;
 
             return (
-              <article key={resource.title} className="rounded-lg border border-slate-200 bg-white p-5">
-                <span className="grid h-11 w-11 place-items-center rounded-lg bg-cyan-600 text-white">
+              <article
+                key={resource.title}
+                className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-cyan-200 hover:shadow-lg hover:shadow-slate-200/70"
+              >
+                <span className="grid h-11 w-11 place-items-center rounded-lg bg-cyan-600 text-white shadow-sm">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <h3 className="mt-5 text-lg font-extrabold text-slate-950">{resource.title}</h3>

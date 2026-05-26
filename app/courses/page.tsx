@@ -42,7 +42,7 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
             <p className="text-sm font-bold uppercase tracking-wide text-cyan-700">
               CourseJava Courses
             </p>
-            <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl">
+            <h1 className="mt-3 text-4xl font-extrabold text-slate-950 sm:text-5xl">
               Khóa học miễn phí cho người mới học lập trình.
             </h1>
             <p className="mt-5 text-base leading-8 text-slate-600 sm:text-lg">

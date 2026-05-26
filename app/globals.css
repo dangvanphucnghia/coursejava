@@ -30,7 +30,11 @@ body {
 
 @media (max-width: 767px) {
   .floating-mascot {
-    display: none;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    left: auto;
+    right: 0.75rem;
+    top: auto;
+    transform: none !important;
   }
 }
 

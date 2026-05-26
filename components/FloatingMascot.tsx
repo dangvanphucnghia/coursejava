@@ -23,6 +23,13 @@ export function FloatingMascot({ text }: { text: string }) {
     const reduceMotion =
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const isCoarsePointer =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(pointer: coarse)").matches;
+
+    if (isCoarsePointer) {
+      return;
+    }
 
     const OFFSET = { x: 28, y: 28 }; // icon chỉ bay "gần" chuột, không dính sát
     const EASE = reduceMotion ? 1 : 0.10; // càng nhỏ càng mượt
@@ -90,17 +97,26 @@ export function FloatingMascot({ text }: { text: string }) {
     waveTimer.current = window.setTimeout(() => setWaving(false), 1200);
   };
 
+  const onPress = () => {
+    setWaving(true);
+    if (waveTimer.current) window.clearTimeout(waveTimer.current);
+    waveTimer.current = window.setTimeout(() => setWaving(false), 1800);
+  };
+
   return (
     <div
       ref={elRef}
       onMouseEnter={onHover}
+      onClick={onPress}
       className="floating-mascot pointer-events-auto relative"
       aria-label="Mascot"
     >
       {/* bubble */}
       <div
         className={[
-          "pointer-events-none absolute -left-2 -top-12 z-20 translate-x-[100px] -translate-y-[50px]",
+          "pointer-events-none absolute z-20",
+          "bottom-full right-0 mb-2 md:-left-2 md:-top-12 md:bottom-auto md:right-auto md:mb-0",
+          "md:translate-x-[100px] md:-translate-y-[50px]",
           waving ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1",
           "transition-all duration-200 ease-out",
         ].join(" ")}
@@ -118,7 +134,7 @@ export function FloatingMascot({ text }: { text: string }) {
           {/* tail (mũi tên) */}
           <span
             className={[
-              "pointer-events-none absolute -bottom-2 left-7 h-4 w-4 rotate-45",
+              "pointer-events-none absolute -bottom-2 right-7 h-4 w-4 rotate-45 md:left-7 md:right-auto",
               "border border-white/15 bg-black/60 backdrop-blur-md",
             ].join(" ")}
           />
@@ -133,7 +149,7 @@ export function FloatingMascot({ text }: { text: string }) {
         height={150}
         unoptimized
         priority
-        className="select-none"
+        className="h-24 w-24 select-none md:h-[150px] md:w-[150px]"
         draggable={false}
       />
     </div>

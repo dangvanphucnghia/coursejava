@@ -131,7 +131,7 @@ export function CourseDetailTemplate({ course, detail }: CourseDetailTemplatePro
             <p className="mt-8 text-sm font-bold uppercase tracking-wide text-cyan-300">
               {course.eyebrow}
             </p>
-            <h1 className="mt-3 max-w-4xl text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="mt-3 max-w-4xl text-4xl font-extrabold sm:text-5xl lg:text-6xl">
               {detail.heroTitle}
             </h1>
             <p className="mt-5 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg">
@@ -261,7 +261,7 @@ export function CourseDetailTemplate({ course, detail }: CourseDetailTemplatePro
             </p>
             <h2
               id="study-plan-title"
-              className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl"
+              className="mt-3 text-3xl font-extrabold text-slate-950 sm:text-4xl"
             >
               Cách học để không bị ngợp.
             </h2>
@@ -292,7 +292,7 @@ export function CourseDetailTemplate({ course, detail }: CourseDetailTemplatePro
             </p>
             <h2
               id="lessons-title"
-              className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl"
+              className="mt-3 text-3xl font-extrabold text-slate-950 sm:text-4xl"
             >
               Module, mục tiêu và bài tập sau từng bài.
             </h2>
@@ -379,7 +379,7 @@ export function CourseDetailTemplate({ course, detail }: CourseDetailTemplatePro
                 </div>
                 <h2
                   id="project-title"
-                  className="mt-5 text-3xl font-extrabold tracking-tight text-slate-950"
+                  className="mt-5 text-3xl font-extrabold text-slate-950"
                 >
                   {detail.finalProject.title}
                 </h2>
@@ -427,7 +427,7 @@ export function CourseDetailTemplate({ course, detail }: CourseDetailTemplatePro
               </p>
               <h2
                 id="resources-title"
-                className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl"
+                className="mt-3 text-3xl font-extrabold text-slate-950 sm:text-4xl"
               >
                 Checklist, bài tập và tài liệu đi kèm.
               </h2>
@@ -461,7 +461,7 @@ export function CourseDetailTemplate({ course, detail }: CourseDetailTemplatePro
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:px-8">
           <div>
             <p className="text-sm font-bold uppercase tracking-wide text-cyan-300">Next steps</p>
-            <h2 id="next-steps-title" className="mt-3 text-3xl font-extrabold tracking-tight">
+            <h2 id="next-steps-title" className="mt-3 text-3xl font-extrabold">
               Học xong nên làm gì tiếp?
             </h2>
             <p className="mt-4 text-sm leading-7 text-slate-300">

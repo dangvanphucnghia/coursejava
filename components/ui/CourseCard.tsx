@@ -61,8 +61,8 @@ export function CourseCard({ course, showOutcomes = false, className = "" }: Cou
   const theme = themeStyles[course.theme];
   const isAvailable = course.status === "available";
   const rootClassName = [
-    "group flex h-full flex-col rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition",
-    `hover:-translate-y-1 hover:shadow-md ${theme.border}`,
+    "group flex h-full flex-col rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition duration-200",
+    `hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-200/70 ${theme.border}`,
     className,
   ]
     .filter(Boolean)
@@ -87,20 +87,20 @@ export function CourseCard({ course, showOutcomes = false, className = "" }: Cou
           <p className="mt-4 text-sm font-semibold text-slate-500">{course.eyebrow}</p>
         </div>
 
-        <div className={`grid h-11 w-11 shrink-0 place-items-center rounded-lg ${theme.icon}`}>
+        <div className={`grid h-11 w-11 shrink-0 place-items-center rounded-lg shadow-sm ${theme.icon}`}>
           <FiBookOpen className="h-5 w-5" aria-hidden="true" />
         </div>
       </div>
 
       <div className="mt-4 flex-1">
-        <h3 className="text-xl font-bold tracking-tight text-slate-950">{course.title}</h3>
+        <h3 className="text-xl font-extrabold text-slate-950">{course.title}</h3>
         <p className="mt-3 text-sm leading-6 text-slate-600">{course.description}</p>
 
         <div className="mt-4 flex flex-wrap gap-2">
           {course.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600"
+              className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600"
             >
               {tag}
             </span>
@@ -129,7 +129,7 @@ export function CourseCard({ course, showOutcomes = false, className = "" }: Cou
         </div>
 
         <span
-          className={`inline-flex items-center gap-2 text-sm font-bold ${
+          className={`inline-flex items-center gap-2 rounded-full bg-slate-50 px-3 py-2 text-sm font-bold transition group-hover:bg-slate-950 group-hover:text-white ${
             isAvailable ? theme.cta : "text-slate-700"
           }`}
         >

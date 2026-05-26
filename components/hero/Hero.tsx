@@ -105,7 +105,7 @@ export function Hero() {
             </div>
 
             <h1 className="mt-5 text-white">
-              <span className="block text-[clamp(2.2rem,6vw,5.4rem)] font-extrabold leading-[0.96] tracking-[-0.02em]">
+              <span className="block text-[clamp(2.2rem,6vw,5.4rem)] font-extrabold leading-[0.96]">
                 Portfolio
               </span>
               <span className="mt-3 block text-[clamp(0.8rem,2vw,1.2rem)] font-semibold tracking-[0.32em] text-white/70">
@@ -114,7 +114,7 @@ export function Hero() {
             </h1>
 
             <div className="mt-6">
-              <div className="text-[clamp(2.6rem,7vw,6.6rem)] font-extrabold leading-[0.9] tracking-[-0.03em]">
+              <div className="text-[clamp(2.6rem,7vw,6.6rem)] font-extrabold leading-[0.9]">
                 <span className="block text-white">{t.roleTop}</span>
                 <span className="block text-white/35">{t.roleBottom}</span>
               </div>
