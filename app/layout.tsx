@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
+import { FloatingMascot } from "@/components/FloatingMascot";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { IntroVideo } from "@/components/layout/IntroVideo";
@@ -45,6 +46,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <FloatingMascot text="Cần gì thì gọi Nghĩa" />
       </body>
     </html>
   );

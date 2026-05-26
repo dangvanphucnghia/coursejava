@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   FiArrowRight,
@@ -133,14 +132,6 @@ export function HeroSection() {
                           Phát âm, từ vựng và docs reading cho developer.
                         </p>
                       </div>
-                      <Image
-                        src="/images/mascot.gif"
-                        alt=""
-                        width={68}
-                        height={68}
-                        unoptimized
-                        className="hidden shrink-0 sm:block"
-                      />
                     </div>
                   </div>
 
