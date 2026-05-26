@@ -8,6 +8,7 @@ const VIDEO_SRC = "/images/video-banner/7866909641592.mp4";
 
 export function IntroVideo() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const backgroundVideoRef = useRef<HTMLVideoElement | null>(null);
   const fallbackTimerRef = useRef<number | null>(null);
   const closeTimerRef = useRef<number | null>(null);
   const finishedRef = useRef(false);
@@ -36,6 +37,7 @@ export function IntroVideo() {
     finishedRef.current = true;
     clearTimers();
     videoRef.current?.pause();
+    backgroundVideoRef.current?.pause();
     setProgress(100);
     setIsLeaving(true);
     closeTimerRef.current = window.setTimeout(() => setIsVisible(false), 300);
@@ -59,6 +61,10 @@ export function IntroVideo() {
     try {
       setNeedsTapToPlay(false);
       video.currentTime = 0;
+      if (backgroundVideoRef.current) {
+        backgroundVideoRef.current.currentTime = 0;
+        void backgroundVideoRef.current.play().catch(() => undefined);
+      }
       await video.play();
     } catch {
       setNeedsTapToPlay(true);
@@ -83,6 +89,9 @@ export function IntroVideo() {
 
     const handleLoadedMetadata = () => {
       video.currentTime = 0;
+      if (backgroundVideoRef.current) {
+        backgroundVideoRef.current.currentTime = 0;
+      }
       setProgress(0);
       void playIntro();
     };
@@ -138,17 +147,32 @@ export function IntroVideo() {
       aria-modal="true"
     >
       <video
-        ref={videoRef}
-        className="h-[100svh] w-screen bg-black object-cover object-center"
-        autoPlay
+        ref={backgroundVideoRef}
+        className="absolute inset-0 h-full w-full scale-110 object-cover object-center opacity-55 blur-md saturate-125"
         muted
         playsInline
         preload="auto"
-        disablePictureInPicture
-        controlsList="nodownload noplaybackrate nofullscreen"
+        aria-hidden="true"
+        tabIndex={-1}
       >
         <source src={VIDEO_SRC} type="video/mp4" />
       </video>
+      <div className="pointer-events-none absolute inset-0 bg-black/35" />
+
+      <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+        <video
+          ref={videoRef}
+          className="relative z-10 h-[100svh] w-screen bg-black object-cover object-center [@media_(orientation:portrait)]:h-auto [@media_(orientation:portrait)]:max-h-[100svh] [@media_(orientation:portrait)]:w-screen [@media_(orientation:portrait)]:object-contain"
+          autoPlay
+          muted
+          playsInline
+          preload="auto"
+          disablePictureInPicture
+          controlsList="nodownload noplaybackrate nofullscreen"
+        >
+          <source src={VIDEO_SRC} type="video/mp4" />
+        </video>
+      </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-white/10">
         <div
