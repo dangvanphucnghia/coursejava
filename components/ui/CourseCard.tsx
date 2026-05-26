@@ -62,7 +62,7 @@ export function CourseCard({ course, showOutcomes = false, className = "" }: Cou
   const isAvailable = course.status === "available";
   const rootClassName = [
     "group flex h-full flex-col rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition",
-    isAvailable ? `hover:-translate-y-1 hover:shadow-md ${theme.border}` : "opacity-85",
+    `hover:-translate-y-1 hover:shadow-md ${theme.border}`,
     className,
   ]
     .filter(Boolean)
@@ -72,11 +72,18 @@ export function CourseCard({ course, showOutcomes = false, className = "" }: Cou
     <>
       <div className="flex items-start justify-between gap-4">
         <div>
-          <span
-            className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ${theme.badge}`}
-          >
-            {course.priceLabel}
-          </span>
+          <div className="flex flex-wrap gap-2">
+            <span
+              className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ${theme.badge}`}
+            >
+              {course.priceLabel}
+            </span>
+            {isAvailable ? null : (
+              <span className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600 ring-1 ring-slate-200">
+                Lộ trình
+              </span>
+            )}
+          </div>
           <p className="mt-4 text-sm font-semibold text-slate-500">{course.eyebrow}</p>
         </div>
 
@@ -123,24 +130,18 @@ export function CourseCard({ course, showOutcomes = false, className = "" }: Cou
 
         <span
           className={`inline-flex items-center gap-2 text-sm font-bold ${
-            isAvailable ? theme.cta : "text-slate-500"
+            isAvailable ? theme.cta : "text-slate-700"
           }`}
         >
-          {course.ctaLabel ?? (isAvailable ? "Xem khóa học" : "Sắp ra mắt")}
-          {isAvailable ? (
-            <FiArrowRight
-              className="h-4 w-4 transition group-hover:translate-x-0.5"
-              aria-hidden="true"
-            />
-          ) : null}
+          {course.ctaLabel ?? (isAvailable ? "Xem khóa học" : "Xem lộ trình")}
+          <FiArrowRight
+            className="h-4 w-4 transition group-hover:translate-x-0.5"
+            aria-hidden="true"
+          />
         </span>
       </div>
     </>
   );
-
-  if (!isAvailable) {
-    return <article className={rootClassName}>{cardContent}</article>;
-  }
 
   return (
     <Link href={course.href} className={rootClassName} aria-label={`Xem khóa học ${course.title}`}>
