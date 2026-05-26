@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { IntroVideo } from "@/components/layout/IntroVideo";
 import "./globals.css";
 
 const beVietnam = Be_Vietnam_Pro({
@@ -40,6 +41,7 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <body className={`${beVietnam.className} bg-slate-50 text-slate-950 antialiased`}>
+        <IntroVideo />
         <Header />
         {children}
         <Footer />
