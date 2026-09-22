@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BenefitsSection } from "@/components/home/BenefitsSection";
 import { BlogSection } from "@/components/home/BlogSection";
+import { CtaSection } from "@/components/home/CtaSection";
 import { EnglishSection } from "@/components/home/EnglishSection";
 import { FeaturedCourses } from "@/components/home/FeaturedCourses";
 import { HeroSection } from "@/components/home/HeroSection";
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <main>
+    <main id="main">
       <HeroSection />
       <FeaturedCourses />
       <RoadmapSection />
@@ -23,6 +24,7 @@ export default function HomePage() {
       <ProjectSection />
       <BenefitsSection />
       <BlogSection />
+      <CtaSection />
     </main>
   );
 }

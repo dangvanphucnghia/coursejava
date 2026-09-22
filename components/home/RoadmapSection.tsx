@@ -1,6 +1,7 @@
 import {
   FiCode,
   FiDatabase,
+  FiFlag,
   FiLayers,
   FiMonitor,
   FiServer,
@@ -8,128 +9,176 @@ import {
 } from "react-icons/fi";
 import type { IconType } from "react-icons";
 import { roadmapSteps, type RoadmapTheme } from "@/data/roadmap";
+import { Reveal } from "@/components/ui/Reveal";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const icons: IconType[] = [FiMonitor, FiTerminal, FiLayers, FiServer, FiDatabase, FiCode];
 
 const themeStyles: Record<
   RoadmapTheme,
-  {
-    step: string;
-    icon: string;
-    border: string;
-  }
+  { node: string; chip: string; ring: string; accent: string }
 > = {
   cyan: {
-    step: "text-cyan-700 bg-cyan-50 ring-cyan-200",
-    icon: "bg-cyan-600 text-white",
-    border: "border-cyan-200",
+    node: "from-cyan-400 to-sky-500",
+    chip: "bg-cyan-50 text-cyan-800 ring-cyan-200/80",
+    ring: "group-hover:border-cyan-300",
+    accent: "text-cyan-700",
   },
   blue: {
-    step: "text-blue-700 bg-blue-50 ring-blue-200",
-    icon: "bg-blue-600 text-white",
-    border: "border-blue-200",
+    node: "from-blue-500 to-indigo-500",
+    chip: "bg-blue-50 text-blue-800 ring-blue-200/80",
+    ring: "group-hover:border-blue-300",
+    accent: "text-blue-700",
   },
   emerald: {
-    step: "text-emerald-700 bg-emerald-50 ring-emerald-200",
-    icon: "bg-emerald-600 text-white",
-    border: "border-emerald-200",
+    node: "from-emerald-400 to-teal-500",
+    chip: "bg-emerald-50 text-emerald-800 ring-emerald-200/80",
+    ring: "group-hover:border-emerald-300",
+    accent: "text-emerald-700",
   },
   amber: {
-    step: "text-amber-800 bg-amber-50 ring-amber-200",
-    icon: "bg-amber-500 text-white",
-    border: "border-amber-200",
+    node: "from-amber-400 to-orange-500",
+    chip: "bg-amber-50 text-amber-900 ring-amber-200/80",
+    ring: "group-hover:border-amber-300",
+    accent: "text-amber-800",
   },
   violet: {
-    step: "text-violet-700 bg-violet-50 ring-violet-200",
-    icon: "bg-violet-600 text-white",
-    border: "border-violet-200",
+    node: "from-violet-500 to-fuchsia-500",
+    chip: "bg-violet-50 text-violet-800 ring-violet-200/80",
+    ring: "group-hover:border-violet-300",
+    accent: "text-violet-700",
   },
   slate: {
-    step: "text-slate-700 bg-slate-100 ring-slate-200",
-    icon: "bg-slate-900 text-white",
-    border: "border-slate-200",
+    node: "from-slate-700 to-slate-900",
+    chip: "bg-slate-100 text-slate-800 ring-slate-200",
+    ring: "group-hover:border-slate-400",
+    accent: "text-slate-700",
   },
 };
 
+const summary = [
+  { value: "6", label: "chặng học" },
+  { value: "4", label: "project nhỏ" },
+  { value: "0đ", label: "chi phí" },
+];
+
 export function RoadmapSection() {
   return (
-    <section id="roadmap" className="bg-white py-16 sm:py-20" aria-labelledby="roadmap-title">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-          <div className="max-w-3xl">
-            <p className="text-sm font-bold uppercase text-cyan-700">
-            Roadmap Full-stack
-            </p>
-            <h2
-              id="roadmap-title"
-              className="mt-3 text-3xl font-extrabold text-slate-950 sm:text-4xl"
-            >
-              Một lộ trình có thứ tự, có mốc sản phẩm sau mỗi chặng.
-            </h2>
-            <p className="mt-4 text-base leading-7 text-slate-600">
-              Mỗi bước chỉ tập trung một nhóm kỹ năng chính, đi kèm milestone để bạn biết
-              mình đang tiến tới sản phẩm nào.
-            </p>
-          </div>
+    <section
+      id="roadmap"
+      className="relative overflow-hidden bg-white py-20 sm:py-28"
+      aria-labelledby="roadmap-title"
+    >
+      <div
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"
+        aria-hidden="true"
+      />
 
-          <div className="grid grid-cols-3 overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
-            {[
-              ["6", "chặng học"],
-              ["4", "project nhỏ"],
-              ["0đ", "chi phí"],
-            ].map(([value, label]) => (
-              <div key={label} className="border-r border-slate-200 p-4 last:border-r-0">
-                <p className="text-2xl font-extrabold text-slate-950">{value}</p>
-                <p className="mt-1 text-xs font-semibold text-slate-500">{label}</p>
-              </div>
-            ))}
-          </div>
+      <div className="shell">
+        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+          <SectionHeading
+            id="roadmap-title"
+            eyebrow="Roadmap Full-stack"
+            title={
+              <>
+                Một lộ trình có thứ tự, có{" "}
+                <span className="text-gradient-ink">mốc sản phẩm</span> sau mỗi chặng.
+              </>
+            }
+            description="Mỗi bước chỉ tập trung một nhóm kỹ năng chính, đi kèm milestone để bạn biết mình đang tiến tới sản phẩm nào."
+          />
+
+          <Reveal delay={120}>
+            <div className="grid grid-cols-3 gap-px overflow-hidden rounded-3xl border border-slate-200 bg-slate-200">
+              {summary.map((item) => (
+                <div key={item.label} className="bg-white p-5 text-center sm:p-6">
+                  <p className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+                    {item.value}
+                  </p>
+                  <p className="mt-1.5 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-slate-500">
+                    {item.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {roadmapSteps.map((item, index) => {
-            const Icon = icons[index] ?? FiCode;
-            const theme = themeStyles[item.theme];
+        {/* Timeline */}
+        <div className="relative mt-16">
+          <div
+            className="absolute bottom-6 left-[1.375rem] top-4 w-px bg-gradient-to-b from-cyan-300 via-violet-300 to-slate-200 lg:left-1/2"
+            aria-hidden="true"
+          />
 
-            return (
-              <article
-                key={item.step}
-                className={`rounded-lg border bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-200/70 ${theme.border}`}
-              >
-                <div className="flex items-start justify-between gap-4">
+          <ol className="space-y-6 lg:space-y-0">
+            {roadmapSteps.map((item, index) => {
+              const Icon = icons[index] ?? FiCode;
+              const theme = themeStyles[item.theme];
+              const onRight = index % 2 === 1;
+
+              return (
+                <li
+                  key={item.step}
+                  className="relative lg:grid lg:grid-cols-2 lg:gap-x-16 lg:pb-8"
+                >
                   <span
-                    className={`rounded-full px-3 py-1 text-xs font-extrabold ring-1 ${theme.step}`}
+                    className={`absolute left-0 top-6 z-10 grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br text-white shadow-card ring-4 ring-white lg:left-1/2 lg:-translate-x-1/2 ${theme.node}`}
+                    aria-hidden="true"
                   >
-                    {item.step}
+                    <Icon className="h-5 w-5" />
                   </span>
-                  <span className={`grid h-11 w-11 place-items-center rounded-lg ${theme.icon}`}>
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                </div>
 
-                <h3 className="mt-5 text-xl font-extrabold text-slate-950">{item.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{item.description}</p>
-
-                <div className="mt-5 rounded-lg bg-slate-50 p-4">
-                  <p className="text-xs font-bold uppercase text-slate-500">
-                    Milestone
-                  </p>
-                  <p className="mt-1 text-sm font-bold text-slate-900">{item.milestone}</p>
-                </div>
-
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {item.topics.map((topic) => (
-                    <span
-                      key={topic}
-                      className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600"
+                  <Reveal
+                    delay={index * 60}
+                    className={[
+                      "ml-14 sm:ml-16 lg:ml-0",
+                      onRight ? "lg:col-start-2 lg:pl-10" : "lg:col-start-1 lg:pr-10",
+                    ].join(" ")}
+                  >
+                    <article
+                      className={`group rounded-3xl border border-slate-200/80 bg-white p-6 shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-lift ${theme.ring}`}
                     >
-                      {topic}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            );
-          })}
+                      <div className="flex items-center gap-3">
+                        <span
+                          className={`inline-flex rounded-full px-3 py-1 font-mono text-[0.68rem] font-bold tracking-[0.12em] ring-1 ${theme.chip}`}
+                        >
+                          STEP {item.step}
+                        </span>
+                        <span className="hairline flex-1" aria-hidden="true" />
+                      </div>
+
+                      <h3 className="mt-4 text-xl font-extrabold text-slate-950 sm:text-2xl">
+                        {item.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-6 text-slate-600">{item.description}</p>
+
+                      <div className="mt-5 flex items-start gap-3 rounded-2xl bg-slate-50 p-4 ring-1 ring-inset ring-slate-100">
+                        <FiFlag
+                          className={`mt-0.5 h-4 w-4 shrink-0 ${theme.accent}`}
+                          aria-hidden="true"
+                        />
+                        <div>
+                          <p className="font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-slate-500">
+                            Milestone
+                          </p>
+                          <p className="mt-1 text-sm font-bold text-slate-900">{item.milestone}</p>
+                        </div>
+                      </div>
+
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {item.topics.map((topic) => (
+                          <span key={topic} className="chip">
+                            {topic}
+                          </span>
+                        ))}
+                      </div>
+                    </article>
+                  </Reveal>
+                </li>
+              );
+            })}
+          </ol>
         </div>
       </div>
     </section>

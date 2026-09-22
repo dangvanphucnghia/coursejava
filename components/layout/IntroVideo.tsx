@@ -1,10 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { FiChevronRight } from "react-icons/fi";
 
 const INTRO_DURATION_SECONDS = 10;
 const FALLBACK_AFTER_PLAY_MS = INTRO_DURATION_SECONDS * 1000 + 1200;
 const VIDEO_SRC = "/images/video-banner/7866909641592.mp4";
+const SEEN_KEY = "coursejava:intro-seen";
 
 export function IntroVideo() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -12,10 +14,29 @@ export function IntroVideo() {
   const fallbackTimerRef = useRef<number | null>(null);
   const closeTimerRef = useRef<number | null>(null);
   const finishedRef = useRef(false);
-  const [isVisible, setIsVisible] = useState(true);
+  // Starts closed so the first paint never traps a returning visitor behind the
+  // overlay; the effect below opens it only when this session hasn't seen it.
+  const [isVisible, setIsVisible] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
   const [needsTapToPlay, setNeedsTapToPlay] = useState(false);
   const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    try {
+      if (window.sessionStorage.getItem(SEEN_KEY) === "1") {
+        return;
+      }
+
+      window.sessionStorage.setItem(SEEN_KEY, "1");
+    } catch {
+      // Private mode or blocked storage: fall through and play once.
+    }
+
+    // sessionStorage is unreadable during SSR, so showing the overlay can only
+    // be decided after mount. Setting `false` is a no-op, so this cannot cascade.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsVisible(true);
+  }, []);
 
   const clearTimers = useCallback(() => {
     if (fallbackTimerRef.current) {
@@ -40,7 +61,7 @@ export function IntroVideo() {
     backgroundVideoRef.current?.pause();
     setProgress(100);
     setIsLeaving(true);
-    closeTimerRef.current = window.setTimeout(() => setIsVisible(false), 300);
+    closeTimerRef.current = window.setTimeout(() => setIsVisible(false), 420);
   }, [clearTimers]);
 
   const startFallbackTimer = useCallback(() => {
@@ -110,11 +131,18 @@ export function IntroVideo() {
       }
     };
 
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" || event.key === "Enter" || event.key === " ") {
+        finishIntro();
+      }
+    };
+
     video.addEventListener("loadedmetadata", handleLoadedMetadata);
     video.addEventListener("playing", handlePlaying);
     video.addEventListener("timeupdate", handleTimeUpdate);
     video.addEventListener("ended", finishIntro);
     video.addEventListener("error", finishIntro);
+    window.addEventListener("keydown", handleKeyDown);
 
     if (video.readyState >= 1) {
       handleLoadedMetadata();
@@ -126,6 +154,7 @@ export function IntroVideo() {
       video.removeEventListener("timeupdate", handleTimeUpdate);
       video.removeEventListener("ended", finishIntro);
       video.removeEventListener("error", finishIntro);
+      window.removeEventListener("keydown", handleKeyDown);
       clearTimers();
       document.body.style.overflow = previousBodyOverflow;
       document.documentElement.style.overflow = previousHtmlOverflow;
@@ -139,7 +168,7 @@ export function IntroVideo() {
   return (
     <div
       className={[
-        "fixed inset-0 z-[9999] bg-black text-white transition-opacity duration-300",
+        "fixed inset-0 z-[9999] bg-black text-white transition-opacity duration-500",
         isLeaving ? "opacity-0" : "opacity-100",
       ].join(" ")}
       role="dialog"
@@ -174,9 +203,29 @@ export function IntroVideo() {
         </video>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-white/10">
+      {/* Brand mark */}
+      <div className="pointer-events-none absolute left-1/2 top-8 z-20 flex -translate-x-1/2 items-center gap-3 sm:left-8 sm:translate-x-0">
+        <span className="grid h-10 w-10 place-items-center rounded-2xl border border-white/15 bg-white/10 font-mono text-sm font-bold backdrop-blur">
+          CJ
+        </span>
+        <span className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
+          CourseJava
+        </span>
+      </div>
+
+      {/* Skip */}
+      <button
+        type="button"
+        onClick={finishIntro}
+        className="absolute right-4 top-6 z-20 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-bold text-white backdrop-blur-md transition hover:bg-white/20 sm:right-8 sm:top-8"
+      >
+        Bỏ qua
+        <FiChevronRight className="h-4 w-4" aria-hidden="true" />
+      </button>
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-1 bg-white/10">
         <div
-          className="h-full bg-cyan-300 transition-[width] duration-200"
+          className="h-full bg-gradient-to-r from-cyan-300 via-sky-300 to-violet-300 transition-[width] duration-200"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -185,7 +234,7 @@ export function IntroVideo() {
         <button
           type="button"
           onClick={playIntro}
-          className="absolute left-1/2 top-1/2 inline-flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-extrabold text-slate-950 shadow-2xl shadow-black/40 transition hover:bg-cyan-100"
+          className="absolute left-1/2 top-1/2 z-20 inline-flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-extrabold text-slate-950 shadow-2xl shadow-black/40 transition hover:bg-cyan-100"
         >
           Phát video
         </button>

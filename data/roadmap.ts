@@ -134,9 +134,30 @@ export const practicalProjects: PracticalProject[] = [
   },
 ];
 
-export const learningBenefits = [
-  "Học miễn phí, phù hợp người mới bắt đầu",
-  "Roadmap rõ ràng từ frontend đến backend",
-  "Có bài tập thực hành sau từng chặng",
-  "Có project thật để đưa vào CV",
+export type LearningBenefit = {
+  title: string;
+  description: string;
+};
+
+export const learningBenefits: LearningBenefit[] = [
+  {
+    title: "Học miễn phí, phù hợp người mới bắt đầu",
+    description:
+      "Toàn bộ khóa học và tài liệu đều mở, không giới hạn số bài và không cần nền tảng trước đó.",
+  },
+  {
+    title: "Roadmap rõ ràng từ frontend đến backend",
+    description:
+      "Sáu chặng có thứ tự, mỗi chặng nêu rõ cần học gì trước và sản phẩm cần hoàn thành.",
+  },
+  {
+    title: "Có bài tập thực hành sau từng chặng",
+    description:
+      "Mỗi nhóm kiến thức đi kèm bài tập nhỏ để luyện tay ngay thay vì chỉ đọc lý thuyết.",
+  },
+  {
+    title: "Có project thật để đưa vào CV",
+    description:
+      "Bốn project thực chiến với đầu ra cụ thể, đủ để trình bày trong portfolio hoặc buổi phỏng vấn.",
+  },
 ];

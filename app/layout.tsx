@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Be_Vietnam_Pro } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Be_Vietnam_Pro, JetBrains_Mono } from "next/font/google";
 import { FloatingMascot } from "@/components/FloatingMascot";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -9,6 +9,15 @@ import "./globals.css";
 const beVietnam = Be_Vietnam_Pro({
   subsets: ["latin", "vietnamese"],
   weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -34,14 +43,36 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#020617",
+  colorScheme: "light",
+};
+
+// Marks the document as script-capable before paint, so the scroll-reveal
+// hidden state never applies when JavaScript is unavailable.
+const bootScript = `document.documentElement.classList.add("js")`;
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="vi">
-      <body className={`${beVietnam.className} bg-slate-50 text-slate-950 antialiased`}>
+    <html
+      lang="vi"
+      className={`${beVietnam.variable} ${jetBrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
+      </head>
+      <body className="bg-ink-50 font-sans text-slate-950 antialiased">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-slate-950 focus:px-5 focus:py-3 focus:text-sm focus:font-bold focus:text-white"
+        >
+          Bỏ qua tới nội dung chính
+        </a>
         <IntroVideo />
         <Header />
         {children}
